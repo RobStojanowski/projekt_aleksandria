@@ -2,6 +2,7 @@ from django.test import TestCase
 from courses.models import Course, Review, Enrollment
 from django.contrib.auth.models import User
 from datetime import date
+from courses import factories
 
 
 class BaseTest(TestCase):
@@ -18,6 +19,8 @@ class BaseTest(TestCase):
 
 
 class TestCourseModel(BaseTest):
+
+    def setUp(self):
 
     def test_course_model_str_method(self):
         self.assertEqual(str(self.course), "Python")
