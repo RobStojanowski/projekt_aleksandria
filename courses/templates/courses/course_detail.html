@@ -9,11 +9,17 @@
      <p class="card-text">Cena: {{ course.price }}</p>
      <p class="card-text">Data rozpoczęcia: {{ course.start_data }}</p>
      <p class="card-text">Data zakończenia: {{ course.end_data }}</p>
+     {% if user.is_authenticated and not user_enrolled %}
+     <form method="post" action="{% url 'course-enroll' course.id %}">
+       {% csrf_token %}
+       <button type="submit" class="btn btn-primary">Zapisz się</button>
+     </form>
+     {% endif %}
    </div>
   </div>
 
   <!-- opinie o kursie -->
-<h3>Opinie</h3>
+  <h3>Opinie</h3>
   {% for review in reviews %}
     <div class="card mt-3">
       <div class="card-body">
@@ -21,11 +27,13 @@
         <p class="card-text">Ocena: {{ review.rating }}</p>
         <p class="card-text">Komentarz: {{ review.comment }}</p>
       </div>
+
+
     </div>
   {% endfor %}
 
   <!-- formularz oceny kursu -->
-<h3>Dodaj opinię</h3>
+  <h3>Dodaj opinię</h3>
   <form method="post" action="{% url 'add-review' course.id %}">
     {%  csrf_token %}
     <div class="form-group">
@@ -44,5 +52,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Dodaj opinię</button>
   </form>
+
 
 {% endblock %}

@@ -12,10 +12,10 @@ class CourseFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = "courses.Course"
 
-    title = factory.Faker("sentance", nb_words=4)
-    description = factory.Faker("Text", max_nb_chars=256)
-    start_data = factory.Faker("data_object")
-    end_data = factory.Faker("data_object")
+    title = factory.Faker("sentence", nb_words=4)
+    description = factory.Faker("text", max_nb_chars=250)
+    start_data = factory.Faker("date_object")
+    end_data = factory.Faker("date_object")
     author = factory.SubFactory(UserFactory)
     price = factory.Faker("pydecimal", left_digits=4, right_digits=2, positive=True)
 
@@ -26,7 +26,6 @@ class EnrollmentFactory(factory.django.DjangoModelFactory):
 
     user = factory.SubFactory(UserFactory)
     course = factory.SubFactory(CourseFactory)
-
 
 class ReviewFactory(factory.django.DjangoModelFactory):
     class Meta:
